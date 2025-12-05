@@ -54,6 +54,6 @@ Applying Machine Learning (Random Forest) for cell type classification and featu
 
 ### 🖼️ 最終視覺化成果 (Day 5 待完成)
 
-![Top 10 Gene Expression UMAP](umap_top10_gene_expression_umap)
+![Top 10 Gene Expression UMAP](umap_top10_gene_expression_umap.png)
 
 上圖展示了 Top 10 關鍵基因在 UMAP 空間中的表現強度。可以清楚看到，這些高重要性基因的表現強度熱區，與 Day 2 專案中識別出的**不同細胞群集**高度吻合，從而佐證了機器學習模型的分類依據。
