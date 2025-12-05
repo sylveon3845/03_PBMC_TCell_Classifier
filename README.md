@@ -13,15 +13,15 @@ Applying Machine Learning (Random Forest) for cell type classification and featu
 
 ---
 
-### 📈 階段一：數據準備與基礎模型 (Day 3)
+### 📈 階段一：數據準備與基礎模型
 
-1.  **數據準備：** 使用 Day 2 儲存的 2638 個細胞和 1826 個高變異基因。
+1.  **數據準備：** 使用 Project 02 儲存的 2638 個細胞和 1826 個高變異基因。
 2.  **標籤創建：** 根據 Leiden 分群結果，創建 `T-cell` (1) 和 `Non-T-cell` (0) 二元標籤。
 3.  **模型結果 (未優化)：**
     * 測試集整體準確度：`0.8574`
     * T 細胞召回率 (Recall)：`0.97` (成功找出絕大多數 T 細胞)
 
-### 🚀 階段二：模型優化與特徵選擇 (Day 4)
+### 🚀 階段二：模型優化與特徵選擇
 
 #### 1. 超參數搜尋 (Hyperparameter Tuning)
 
@@ -52,8 +52,8 @@ Applying Machine Learning (Random Forest) for cell type classification and featu
 | 5 | CD74 | MHC Class II 相關蛋白。 |
 | 6-10 | RPLs/CCL5 | 核糖體蛋白與趨化因子，反映細胞代謝活性與遷移能力。 |
 
-### 🖼️ 最終視覺化成果 (Day 5 待完成)
+### 🖼️ 最終視覺化成果
 
 ![Top 10 Gene Expression UMAP](umap_top10_gene_expression_umap.png)
 
-上圖展示了 Top 10 關鍵基因在 UMAP 空間中的表現強度。可以清楚看到，這些高重要性基因的表現強度熱區，與 Day 2 專案中識別出的**不同細胞群集**高度吻合，從而佐證了機器學習模型的分類依據。
+上圖展示了 Top 10 關鍵基因在 UMAP 空間中的表現強度。可以清楚看到，這些高重要性基因的表現強度熱區，與 Project 02 專案中識別出的**不同細胞群集**高度吻合，從而佐證了機器學習模型的分類依據。
