@@ -10,7 +10,7 @@
 由於核心數據集 `pbmc_processed_for_ml.h5ad` (約 60MB) 超過 GitHub 網頁上傳限制，為確保專案的可重現性，數據集已獨立託管。
 
 **請點擊此處下載 Project 03/04 核心數據集 pbmc_processed_for_ml.h5ad:**
-**[To be added.]**
+[點擊下載 60MB 數據檔案](https://drive.google.com/file/d/1BXmN9nO3_qcm6eM9OYgh_oJ52lIs4pAP/view?usp=sharing)
 
 **重現步驟：**
 1. 下載 `pbmc_processed_for_ml.h5ad` 檔案。
