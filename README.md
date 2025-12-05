@@ -1,47 +1,41 @@
-# 03_PBMC_TCell_Classifier
-Applying Machine Learning (Random Forest) for cell type classification and feature importance analysis based on single-cell RNA-seq data.
+# 03/04_PBMC_TCell_Classifier
+## 👑 高準確度 T 細胞分類器與機器學習模型深度評估 (Random Forest & SVM)
 
-## 🤖 Project 03：單細胞數據機器學習分類器
-
-### 🎯 專案目標 (Project Goal)
-利用 Day 2 清洗後的單細胞基因表現數據，訓練一個高度準確的 Random Forest 分類器，以區分 **T 細胞 (T-cell)** 與 **非 T 細胞 (Non-T-cell)**，並透過特徵重要性分析來解釋生物學機制。
-
-### 🛠️ 核心技術棧 (Core Technologies)
-* **Scikit-learn (sklearn):** 機器學習模型訓練 (Random Forest)、數據切分、交叉驗證。
-* **GridSearchCV:** 系統化超參數搜尋，確保模型性能最優化和穩健性。
-* **Feature Importance:** 模型可解釋性分析。
+本專案利用單細胞 RNA-seq 數據，成功訓練了高度準確的細胞分類器，並通過引入第二個模型 (SVM) 進行嚴謹的**模型評估與比較**，展現了完整的機器學習應用與模型選擇能力。
 
 ---
 
-### 📈 階段一：數據準備與基礎模型
+### 🚨 數據下載與專案重現性註記 (必讀)
 
-1.  **數據準備：** 使用 Project 02 儲存的 2638 個細胞和 1826 個高變異基因。
-2.  **標籤創建：** 根據 Leiden 分群結果，創建 `T-cell` (1) 和 `Non-T-cell` (0) 二元標籤。
-3.  **模型結果 (未優化)：**
-    * 測試集整體準確度：`0.8574`
-    * T 細胞召回率 (Recall)：`0.97` (成功找出絕大多數 T 細胞)
+由於核心數據集 `pbmc_processed_for_ml.h5ad` (約 60MB) 超過 GitHub 網頁上傳限制，為確保專案的可重現性，數據集已獨立託管。
 
-### 🚀 階段二：模型優化與特徵選擇
+**請點擊此處下載 Project 03/04 核心數據集 pbmc_processed_for_ml.h5ad:**
+**[【請將您的 Google Drive/Dropbox 下載連結貼在此處】]**
 
-#### 1. 超參數搜尋 (Hyperparameter Tuning)
+**重現步驟：**
+1. 下載 `pbmc_processed_for_ml.h5ad` 檔案。
+2. 將該檔案與 `03_PBMC_TCell_Classifier.ipynb` 放置於同一目錄。
+3. 即可執行 Notebook 進行驗證。
 
-使用 5 折交叉驗證 (5-fold CV) 進行網格搜尋，找到最佳模型參數：
+---
 
--   **最佳超參數組合：** `{'max_depth': None, 'min_samples_split': 5, 'n_estimators': 200}`
--   **最佳交叉驗證準確度：** `0.8602`
+### 🎯 專案目標與技術棧
 
-#### 2. 優化後性能報告
+* **目標：** 區分 **T 細胞 (T-cell)** 與 **非 T 細胞 (Non-T-cell)**，並通過多模型比較 (RF vs. SVM) 確立最佳分類策略。
+* **技術棧：** Scikit-learn (Random Forest, SVM)、GridSearchCV、Feature Importance。
 
-| 類別 | 精確率 (Precision) | 召回率 (Recall) | F1-score |
-| :--- | :--- | :--- | :--- |
-| **Non-T-cell (0)** | **0.92** | 0.70 | 0.79 |
-| **T-cell (1)** | 0.82 | **0.96** | 0.88 |
-| **整體準確度 (Accuracy):** | `0.8481` | | |
-**結論：** 優化後模型具備良好的泛化能力，並維持了對 T 細胞類別的極高召回率。
+### 📊 核心分類器：Random Forest (RF)
 
-#### 3. 特徵重要性分析 (Feature Importance)
+| 階段 | 成果總結 | 核心指標 |
+| :--- | :--- | :--- |
+| **數據準備** | 使用 Project 02 清洗後的 2638 個細胞和 1826 個高變異基因。 | 標籤：`T-cell` (1) / `Non-T-cell` (0)。 |
+| **GridSearch 優化** | 使用 5 折交叉驗證 (5-fold CV) 進行網格搜尋，確定最佳參數。 | 最佳交叉驗證準確度：`0.9924` |
+| **優化後性能** | 模型具備強大且穩定的泛化能力。 | **測試集整體準確度：`0.9886`** |
+| **T 細胞識別** | 成功找出所有 T 細胞，無遺漏。 | **T 細胞召回率 (Recall)：`1.00`** |
 
-模型依據重要性排名的 Top 10 基因，證明了分類器的決策具有**生物學可解釋性**：
+### 🔬 特徵重要性分析 (Feature Importance)
+
+模型決策具有高度的**生物學可解釋性**。Top 10 基因反映了 T 細胞的核心免疫功能和代謝狀態。
 
 | 排名 | 基因 (Gene) | 關鍵生物學功能 |
 | :--- | :--- | :--- |
@@ -52,8 +46,23 @@ Applying Machine Learning (Random Forest) for cell type classification and featu
 | 5 | CD74 | MHC Class II 相關蛋白。 |
 | 6-10 | RPLs/CCL5 | 核糖體蛋白與趨化因子，反映細胞代謝活性與遷移能力。 |
 
+### 🚀 階段三：模型比較與評估 (Project 04)
+
+為驗證 Random Forest 的穩健性，我們引入了 **Support Vector Machine (SVM)** 進行比較。
+
+| 模型 | 最佳交叉驗證準確度 | 測試集整體準確度 | 非 T 細胞召回率 (Recall) |
+| :--- | :--- | :--- | :--- |
+| **Random Forest (RF)** | **0.9924** | **0.9886** | **0.94** |
+| **SVM (SVC)** | 0.8521 | 0.8523 | **0.00** (失效) |
+
+#### 模型比較結論：
+
+1.  **RF 優勢：** Random Forest 在整體準確度上遠超 SVM，且在所有指標上表現均衡。
+2.  **SVM 的局限性：** SVM 模型在類別不平衡的數據中表現極差，**將所有樣本都預測為佔多數的 T 細胞**，導致 Non-T-cell 類別的召回率為 0.00。
+3.  **最終選擇：** 最終確認 **Random Forest** 為最佳分類器，證明了其在單細胞數據分類問題上的優越性、穩健性及對少數類別的識別能力。
+
 ### 🖼️ 最終視覺化成果
 
-![Top 10 Gene Expression UMAP](umap_top10_gene_expression_umap.png)
+上圖展示了 Top 10 關鍵基因在 UMAP 空間中的表現強度。可以清楚看到，這些高重要性基因的表現強度熱區，與 Project 02 專案中識別出的不同細胞群集高度吻合，從而佐證了機器學習模型的分類依據。
 
-上圖展示了 Top 10 關鍵基因在 UMAP 空間中的表現強度。可以清楚看到，這些高重要性基因的表現強度熱區，與 Project 02 專案中識別出的**不同細胞群集**高度吻合，從而佐證了機器學習模型的分類依據。
+![Top 10 Gene Expression UMAP](umap_top10_gene_expression_umap.png)
